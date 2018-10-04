@@ -3,19 +3,25 @@ using System.Collections;
 
 public class InfiniteScroll : MonoBehaviour
 {
-    public float scrollSpeed;
-    public float tileSizeZ;
-
-    private Vector3 startPosition;
+    private float scrollSpeed = 1;
+    private Vector3 currentPosition;
 
     void Start()
     {
-        startPosition = transform.position;
+        currentPosition = transform.position;
     }
 
     void Update()
     {
-        float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
-        transform.position = startPosition + Vector3.forward * newPosition;
+        float offset = Time.deltaTime * scrollSpeed;
+        Debug.Log(offset);
+        transform.position = currentPosition - Vector3.right * offset;
+        if(transform.position.x < 0)
+        {
+            Vector3 temp = new Vector3(34, 0, 0);
+            transform.position += temp;
+        }
+        currentPosition = transform.position;
+
     }
 }
