@@ -139,8 +139,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 271507552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17, y: 0, z: 6}
-  m_LocalScale: {x: 17, y: 10, z: 1}
+  m_LocalPosition: {x: 15, y: 0, z: 6}
+  m_LocalScale: {x: 15, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -156,8 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245aa2642c6bba94194f798e8f924e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 10
-  tileSizeZ: 20
 --- !u!64 &271507555
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -285,7 +283,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1332932092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.6, y: 0.3, z: -10}
+  m_LocalPosition: {x: 14.6, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -373,8 +371,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1945460841}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34, y: 0, z: 6}
-  m_LocalScale: {x: 17, y: 10, z: 1}
+  m_LocalPosition: {x: 30, y: 0, z: 6}
+  m_LocalScale: {x: 15, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -390,5 +388,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245aa2642c6bba94194f798e8f924e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 10
-  tileSizeZ: 20
