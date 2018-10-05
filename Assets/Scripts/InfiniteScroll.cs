@@ -14,7 +14,7 @@ public class InfiniteScroll : MonoBehaviour
     void Update()
     {
         float offset = Time.deltaTime * scrollSpeed;
-        Debug.Log(offset);
+        //Debug.Log(offset);
         transform.position = currentPosition - Vector3.right * offset;
         if(transform.position.x < 0)
         {
