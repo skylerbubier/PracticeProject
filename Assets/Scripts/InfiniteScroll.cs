@@ -3,7 +3,7 @@ using System.Collections;
 
 public class InfiniteScroll : MonoBehaviour
 {
-    public float scrollSpeed = 1;
+    public float scrollSpeed;
     private Vector3 currentPosition;
 
     void Start()
