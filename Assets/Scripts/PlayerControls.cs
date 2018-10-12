@@ -3,12 +3,15 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+[RequireComponent(typeof(Player))]
 public class PlayerControls : MonoBehaviour
 {
 
     #region const
 
     // Movement Constants
+    private const float MOVE_MIN_X = -4f;
+    private const float MOVE_MAX_X = 4f;
     private const float CENTERING_THRESHOLD = 0.01f;
     private const float CENTERING_SPEED = 0.1f;
     private const float ROTATE_RESET_SPEED = 0.1f;
@@ -25,13 +28,11 @@ public class PlayerControls : MonoBehaviour
     private float _fireElapsed = 0f;
 
     #endregion
+    
 
-    // Player Movement Bounds
-    public float moveMinY = -3.75f;
-    public float moveMaxY = 3.75f;
     public float keyMoveSpeed = 0.3f;
     public float touchChaseSpeed = 0.2f;
-    public float fireRate = 1f;
+
 
     /// <summary>
     /// Returns if the player is in a "reset mode" and the ship is moving to center
@@ -84,17 +85,17 @@ public class PlayerControls : MonoBehaviour
 
     private void Update_Movement()
     {
-        var posYOrig = transform.position.y;
-        var posYNew = posYOrig;
+        var posXOrig = transform.position.x;
+        var posXNew = posXOrig;
 
 
         if (_isCentering)
         {
             // Center Player
-            posYNew = Mathf.Lerp(transform.position.y, 0, CENTERING_SPEED);
+            posXNew = Mathf.Lerp(transform.position.x, 0, CENTERING_SPEED);
 
             // Finish Centering once close enough
-            if (Mathf.Abs(posYNew) < CENTERING_THRESHOLD)
+            if (Mathf.Abs(posXNew) < CENTERING_THRESHOLD)
             {
                 _isCentering = false;
             }
@@ -102,13 +103,13 @@ public class PlayerControls : MonoBehaviour
         else if (!_isMovementLocked)
         {
             // Keyboard Input for PC Testing
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.D))
             {
-                posYNew += keyMoveSpeed;
+                posXNew += keyMoveSpeed;
             }
-            else if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.A))
             {
-                posYNew -= keyMoveSpeed;
+                posXNew -= keyMoveSpeed;
             }
 
             // Handle Touch Input
@@ -118,24 +119,24 @@ public class PlayerControls : MonoBehaviour
 
                 Debug.Log(string.Format("I am being touched by {0} in the {1}.", i, touch.position));
 
-                posYNew = Mathf.Lerp(transform.position.y, touch.position.y, touchChaseSpeed);
+                posXNew = Mathf.Lerp(transform.position.x, touch.position.x, touchChaseSpeed);
             }
 
         }
 
         // Set New Player Position
         transform.position = new Vector3(
-            transform.position.x,
-            posYNew,
+            posXNew,
+            transform.position.y,
             transform.position.z);
 
         // Tilt the ship to simulate fluid movement
         if (_ship != null)
         {
-            var posYdelta = Mathf.Clamp(posYNew - posYOrig, -90f, 90f);
+            var posXdelta = Mathf.Clamp(posXOrig - posXNew, -90f, 90f);
             _ship.transform.rotation = new Quaternion(
-                Mathf.Lerp(_ship.transform.rotation.x, posYdelta, ROTATE_RESET_SPEED),
-                _ship.transform.rotation.y,
+                _ship.transform.rotation.x,
+                Mathf.Lerp(_ship.transform.rotation.y, posXdelta, ROTATE_RESET_SPEED),
                 _ship.transform.rotation.z,
                 _ship.transform.rotation.w);
 
@@ -143,13 +144,15 @@ public class PlayerControls : MonoBehaviour
 
         // Clamp Player Position
         transform.position = new Vector3(
-            transform.position.x,
-            Mathf.Clamp(transform.position.y, moveMinY, moveMaxY),
+            Mathf.Clamp(transform.position.x, MOVE_MIN_X, MOVE_MAX_X),
+            transform.position.y,
             transform.position.z);
     }
 
     private void Update_Firing()
     {
+
+        var fireRate = GetComponent<Player>().fireRate;
 
         if (Input.GetKeyDown(KeyCode.F))
         {
