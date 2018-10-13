@@ -21,6 +21,7 @@ public class PlayerControls : MonoBehaviour
     #region private
 
     // Private
+    private Player _player;
     private PlayerShip _ship;
     private bool _isCentering = false;
     private bool _isMovementLocked = false;
@@ -74,6 +75,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Start()
     {
+        _player = GetComponent<Player>();
         _ship = gameObject.GetComponentInChildren<PlayerShip>();
     }
 
@@ -167,6 +169,10 @@ public class PlayerControls : MonoBehaviour
                 _fireElapsed -= fireRate;
 
                 //TODO: Spawn lasers!
+                foreach (var weapon in _player.Weapons)
+                {
+                    weapon.Fire(_player);
+                }
 
             }
         }
