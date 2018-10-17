@@ -198,7 +198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  fireRate: 1
+  fireRate: 0.1
+  baseDamage: 10
   weapons:
   - {fileID: 114842291220777214, guid: 9502b0f228506284d9df11147e5115a0, type: 2}
 --- !u!114 &114962374068118354
