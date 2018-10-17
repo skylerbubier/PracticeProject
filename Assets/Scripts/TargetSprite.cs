@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 
 using UnityEngine;
 
@@ -7,7 +7,7 @@ using UnityEngine;
 public class TargetSprite : MonoBehaviour
 {
 
-    public float health = 10f;
+    public float health = 100f;
 
     private void Start()
     {
@@ -22,11 +22,25 @@ public class TargetSprite : MonoBehaviour
     public void Hit(float damage)
     {
         health -= damage;
+
+        //Play destroy sound, call destroy
         if (health <= 0)
         {
-            Debug.Log("Destroyed " + name);
-            Destroy(gameObject);
+            var audioData = GetComponent<AudioSource>();
+            audioData.Play(0);
+
+            //disable graphics
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+            //disable collision
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
     }
 
+    IEnumerator Destroy(float time)
+    {
+        //Wait for sound to stop
+        yield return new WaitForSeconds(time);
+        Destroy(gameObject);
+    }
 }

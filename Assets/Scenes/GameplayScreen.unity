@@ -537,7 +537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 114572214579805098, guid: d639775b9a629bb44a1fa32ab55064b9,
     type: 2}
-  testEnemy: {fileID: 114900373643507222, guid: 62a2890cef2fec649b75ab87872f6a5c,
+  testEnemy: {fileID: 114547587865771096, guid: 35552eaf6e136a04a91d1dc1dd8195b1,
     type: 2}
 --- !u!4 &1344890181
 Transform:
